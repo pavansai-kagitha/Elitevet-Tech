@@ -1,8 +1,20 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import heroImg from "../../../assets/Herobg.webp"
 import { Titles } from "../../Common/Titles";
+// ✅ Fix Leaflet marker icon issue for Netlify/React builds
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+// Override the default icon paths
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
 // Locations with custom pin colors + flags
 const locations = [
     { name: "United States", coords: [39.8283, -98.5795], flag: "us" },
@@ -34,7 +46,8 @@ const Operations = () => (
                 </div>
             </div>
         </section>
-        <div className="container py-5">
+        <section className="py-5 bg-light-gray ">
+        <div className="container ">
             {/* Title changed */}
             <Titles text="Global Operations" />
             <h3 className='sub-title text-black mb-4 text-center'>Operational excellence without borders.</h3>
@@ -68,6 +81,7 @@ const Operations = () => (
                 </div>
             </div>
         </div>
+        </section>
 
       
     </>
