@@ -117,6 +117,8 @@ const Jobapply = () => {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
+                            <div className="card">
+                                <div className="card-body">
                             <Form onSubmit={handleSubmit}>
                                 {/* Role */}
                                 <Form.Group controlId="role" className="mb-3">
@@ -182,6 +184,8 @@ const Jobapply = () => {
                                     </Button>
                                 </div>
                             </Form>
+                            </div>
+                            </div>
                         </div>
                     </div>
 
