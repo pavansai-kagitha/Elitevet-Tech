@@ -1,0 +1,16 @@
+.btn-comp{
+    cursor: pointer;
+    text-align: center;
+    padding: 5px 11px;
+    border: 0;
+    border-radius: 2.5em;
+    outline: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* .bg-yellow{
+    background: #ffd602;
+    color: #00283c;
+} */
+

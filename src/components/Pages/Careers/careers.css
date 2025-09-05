@@ -1,0 +1,15 @@
+#search_job:focus,#fliter_location:focus,#fliter_tech:focus,input:focus,textarea:focus,select:focus{
+    box-shadow: none !important;
+    border-color: #2684FF !important;
+}
+label:has(+ input:required)::after {
+  content: ' *'; 
+  color: red;    
+
+}
+select:required+label::after,
+textarea:required+label::after {
+  content: ' *';
+  color: red;
+}
+

@@ -1,0 +1,352 @@
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css");
+
+
+/* @font-face {
+    font-family: Trenda;
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url('./assets/fonts/trenda/Trenda-Regular.otf') format('opentype');
+    font-stretch: normal;
+}
+
+@font-face {
+    font-family: Trenda;
+    font-style: normal;
+    font-weight: 300;
+    font-display: fallback;
+    src: url('./assets/fonts/trenda/Trenda-Light.otf') format('opentype');
+    font-stretch: normal;
+}
+
+@font-face {
+    font-family: Trenda;
+    font-style: normal;
+    font-weight: 500;
+    font-display: fallback;
+    src: url('./assets/fonts/trenda/Trenda-emibold.otf') format('opentype');
+    font-stretch: normal;
+}
+
+@font-face {
+    font-family: Trenda;
+    font-style: normal;
+    font-weight: 700;
+    font-display: fallback;
+    src: url('./assets/fonts/trenda/Trenda-Bold.otf') format('opentype');
+    font-stretch: normal;
+} */
+
+@font-face {
+  font-family: "Soehne Breit";
+  font-style: normal;
+  font-weight: 100 400;
+  font-display: fallback;
+  src: url("./assets/fonts/soehne-breit-400-normal.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: "Soehne Breit";
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: fallback;
+  src: url("./assets/fonts/soehne-breit-500-normal.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: Soehne;
+  font-style: normal;
+  font-weight: 100 400;
+  font-display: fallback;
+  src: url("./assets/fonts/soehne-400-normal.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: Soehne;
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: fallback;
+  src: url("./assets/fonts/soehne-500-normal.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: "Soehne Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: fallback;
+  src: url("./assets/fonts/soehne-mono-400-normal.woff2") format('woff2');
+}
+
+
+
+
+:root {
+  --primaryClr: #fe4e37;
+  --secondaryClr: #0e0f13;
+  --bgClr: #f8f9fd;
+  --white: #ffffff;
+  --black: black;
+  --textclr: #525866
+;
+  --titleText:62px;
+  --smallText: 12px;
+  --bodyText: 16px;
+  --subTitle: 18px;
+  --heading: 26px;
+  --sub-title: 40px;
+  --sub-heading: 20px;
+  --font-family--soehne-breit: "Soehne Breit";
+  --font-family--soehne: "Soehne";
+  --font-family--soehne-mono: "Soehne Mono";
+
+  --bg-primary-light:#e3f4fc;
+  --bg-pink-light:#fdeffd;
+  --bg-green-light:#d4ece9;
+  --bg-orange-light:#fff0e3;
+  --bg-blue-light:#ebe7f7;
+
+
+
+
+}
+.leaflet-container {
+  width: 100%;
+  height: 500px;
+}
+
+.text-primary-light{
+  background-color: var(--bg-primary-light);
+}
+.text-pink-light{
+  
+  color: #e679e6 !important;
+}
+.text-green-light{
+
+  color: #47c48a !important;
+}
+.text-blue-light{
+
+  color: #9555db !important;
+}
+
+.text-orange-light{
+ 
+  color: #ff9840 !important;
+}
+
+.card-body-clr{
+  background-color: #C6E3FF !important;
+}
+
+.fs-14{
+  font-size: 14px;
+}
+
+
+
+
+
+
+.fs-18{
+  font-size: var(--subTitle);
+}
+
+.text-primary-cl {
+  color: var(--secondaryClr);
+}
+
+.title {
+  font-size: var(--titleText);
+  font-family: var(--font-family--soehne-breit);
+}
+
+.sub-title {
+font-size: clamp(20px, 4vw, var(--sub-title));
+  font-family: var(--font-family--soehne-breit);
+  font-weight: 500;
+line-height: clamp(26px, 5vw, 46px);
+  color: #fcfcfc;
+}
+
+.sub-heading {
+  font-size: var(--sub-heading);
+  color: var(--secondaryClr);
+  font-family: var(--font-family--soehne-breit);
+}
+
+.font-primary{
+  font-family: var(--font-family--soehne-breit);
+}
+.font-secondary{
+  font-family: var(--font-family--soehne);
+}
+.font-p{
+  font-family: var(--font-family--soehne-mono);
+}
+
+.bg-main{
+  background-color: var(--secondaryClr);
+}
+
+
+
+
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: var(--font-family--soehne);
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  color: var(--textclr);
+  background-image: url("../src/assets/noise.webp");
+  background-repeat: repeat;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.937rem;
+  padding-right: 0.937rem;
+  max-width: 1200px;
+}
+
+.body-text,
+p {
+  font-size: var(--bodyText);
+  color: var(--textclr);
+  line-height: 24px;
+}
+
+.white-space-no{
+  white-space:nowrap;
+}
+

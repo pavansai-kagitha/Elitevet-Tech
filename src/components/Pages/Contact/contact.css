@@ -1,0 +1,15 @@
+.ul_about li::before{
+   font-family: "bootstrap-icons";
+ content: "\F272";
+color: #0669FD;
+    font-weight: 400;
+    font-size: 22px;
+
+}
+
+.ul_about li{
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  gap: 10px;
+}

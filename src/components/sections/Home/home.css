@@ -1,0 +1,92 @@
+.hero_section::after{
+    background-color: #0009;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  
+}
+
+@media (min-width: 992px) {
+ 
+}
+
+   .pt-lg-8 {
+        padding-top: 8rem !important;
+   
+    }
+
+
+.hero_section {
+  overflow: hidden;
+}
+
+.hero-img {
+  object-fit: cover;
+  animation: zoomFade 10s ease-in-out infinite alternate;
+}
+.fs-14{
+  font-size: 14px;
+}
+.fs-st{
+  font-style: italic;
+}
+
+
+.testm-section::after{
+      content: "";
+    position: absolute;
+    height: 20rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* z-index: 9999; */
+    pointer-events: none;
+     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FCFCFC 100%);
+}
+
+/* Image animation */
+@keyframes zoomFade {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+
+.logo_imgs{
+    height: 152px;
+    width: 152px;
+    object-fit: contain;
+}
+
+/* cards style */
+.bg-darks{
+  background-color: #0e0f13;
+}
+.bg-card-p{
+  background-color: #767778 ;
+}
+
+.section-bg{
+  background-color: #323852 ;
+}
+.dark-card-text{
+  color: #99a0ae;
+}
+
+.bg-light-gray{
+  background-color: #f5f7fa;
+}
+
+
+
+
+
+

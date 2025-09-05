@@ -1,0 +1,22 @@
+.bg-strips{
+    background-image: url(../../../assets/strip-lines.svg);
+    background-position: 0 0;
+    background-size: cover;
+}
+
+.social_links_li li{
+    background-color: #222530;
+    border-radius: .25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social_links_li li a{
+text-decoration: none;
+color: #ffffff;
+
+}
+

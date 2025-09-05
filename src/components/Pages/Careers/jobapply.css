@@ -1,0 +1,13 @@
+#back_link {
+    color: #000000 !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: clamp(0.875rem, 0.875rem + ((1vw - 0.2rem) * 0.221), 1rem);
+    font-weight: 500;
+    gap: .5rem;
+
+}
