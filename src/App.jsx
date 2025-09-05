@@ -7,7 +7,7 @@ import ServicesPage from "./components/Pages/Services/Services";
 import { AnimatePresence,motion } from "framer-motion";
 import { useEffect } from "react";
 import Operations from "./components/Pages/Operations/Operations";
-import CareersPage from "./components/Pages/Careers/CareersPage.JSX";
+import CareersPage from "./components/Pages/Careers/CareersPage.jsx";
 import Jobapply from "./components/Pages/Careers/Jobapply";
 import IndustryInsights from "./components/Pages/IndustryInsights/IndustryInsights";
 import Testimonials from "./components/Pages/Testimonials/Testimonials";
