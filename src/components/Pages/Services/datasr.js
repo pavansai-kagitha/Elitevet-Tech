@@ -10,6 +10,7 @@ import projectmanagerslogo from "../../../assets/services/p-management.webp"
 import functionalConsultantslogo from "../../../assets/services/fc.jpg"
 import strategicConsultantslogo from "../../../assets/services/strategic-consulting.png"
 import businessAnalystslogo from "../../../assets/services/ba-sm.jpg"
+import gis from "../../../assets/services/gis.png"
 import heroImg from "../../../assets/Herobg.webp"
 const servicesContent = {
   // add all 8 services here...
@@ -269,7 +270,7 @@ const servicesContent = {
 
   gis: {
     bgimg:heroImg,
-    imgs: awsimg,
+    imgs: gis,
     title: "GIS Services & Solutions",
     description:
       "Unlock location-based insights to drive smarter decision-making and operational efficiency.",
