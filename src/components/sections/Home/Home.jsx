@@ -14,7 +14,6 @@ const logos = [
   "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2023/03/0004_upcity.png",
   "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2023/03/top_the_manifest_cybersecurity_company_los_angeles_2023_award.png",
   "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2023/03/0000_CISSP.png",
-  "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2024/05/calitroup-bbb-accredited-business-v1.png",
   "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2025/03/Cloud-Tango-MSP-US-Select-2025-Badge-v2.png",
 ];
 const industries = [
