@@ -1,11 +1,10 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import heroImg from "../../../assets/Herobg.webp";
 import { Titles } from "../../Common/Titles";
 import Select from "react-select";
 import { motion, AnimatePresence } from "framer-motion";
-import "../Contact/contact.css"
-
-
+import "../Contact/contact.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +14,9 @@ const Contact = () => {
     message: "",
     service: null,
   });
+  const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const serviceOptions = [
     { value: "staffing", label: "IT Staffing" },
@@ -24,28 +25,151 @@ const Contact = () => {
     { value: "sap", label: "SAP Services" },
   ];
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  // ================== Handlers ==================
+
+  const handleNameChange = (e) => {
+    let value = e.target.value
+      .replace(/https?:\/\/\S+/gi, "") // remove links
+      .replace(/[^a-zA-Z0-9\s]/g, ""); // allow letters, numbers & spaces
+
+    if (value.length > 50) value = value.slice(0, 50);
+
+    setFormData({ ...formData, name: value });
+    setErrors((prev) => ({
+      ...prev,
+      name: value.trim().length < 2 ? "Name must be at least 2 characters" : "",
+    }));
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setFormData({ ...formData, email: value });
+
+    setErrors((prev) => ({
+      ...prev,
+      email:
+        !value
+          ? "Email is required"
+          : /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+          ? ""
+          : "Invalid email format",
+    }));
+  };
+
+  const handlePhoneChange = (e) => {
+    let value = e.target.value.replace(/[^0-9+]/g, "");
+
+    // Only allow + at start
+    if (value.includes("+") && value.indexOf("+") > 0) {
+      value = value.replace(/\+/g, "");
+    }
+
+    // Limit digits to 15 (excluding +)
+    const digitsOnly = value.replace(/\D/g, "");
+    if (digitsOnly.length > 15) {
+      value = value.slice(0, value.length - (digitsOnly.length - 15));
+    }
+
+    setFormData({ ...formData, phone: value });
+
+    setErrors((prev) => ({
+      ...prev,
+      phone:
+        digitsOnly.length < 7 || digitsOnly.length > 15
+          ? "Enter a valid phone number (7–15 digits)"
+          : "",
+    }));
+  };
+
+  const handleMessageChange = (e) => {
+    let value = e.target.value.replace(/https?:\/\/\S+/gi, "");
+    if (value.length > 500) value = value.slice(0, 500);
+
+    setFormData({ ...formData, message: value });
+
+    setErrors((prev) => ({
+      ...prev,
+      message:
+        value.trim().length < 5 ? "Message must be at least 5 characters" : "",
+    }));
   };
 
   const handleSelectChange = (selectedOption) => {
     setFormData({ ...formData, service: selectedOption });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
-    setShowModal(true);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-      service: null,
+    setErrors({
+      ...errors,
+      service: selectedOption ? "" : "Please select a service",
     });
   };
- // ✅ Prevent background scroll when modal is open
+
+  // Validate all fields before submit
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim() || formData.name.length < 2)
+      newErrors.name = "Name must be at least 2 characters";
+
+    if (!formData.email)
+      newErrors.email = "Email is required";
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email))
+      newErrors.email = "Invalid email format";
+
+    const phoneDigits = formData.phone.replace(/\D/g, "");
+    if (!formData.phone)
+      newErrors.phone = "Phone is required";
+    else if (phoneDigits.length < 7 || phoneDigits.length > 15)
+      newErrors.phone = "Enter a valid phone number (7–15 digits)";
+
+    if (!formData.message.trim() || formData.message.length < 5)
+      newErrors.message = "Message must be at least 5 characters";
+
+    if (!formData.service) newErrors.service = "Please select a service";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // ================== Submit ==================
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setLoading(true);
+
+    try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        service: formData.service?.value || null,
+      };
+
+      await axios.post(
+        "https://cloudifai.com/elitevet-tech/api/store-contact-us",
+        payload,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      setShowModal(true);
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        service: null,
+      });
+      setErrors({});
+    } catch (error) {
+      setErrors({ api: "Something went wrong. Please try again." });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Prevent background scroll when modal is open
   useEffect(() => {
     if (showModal) {
       document.body.classList.add("modal-open");
@@ -55,6 +179,8 @@ const Contact = () => {
       document.body.style.overflow = "auto";
     }
   }, [showModal]);
+
+  // ================== JSX ==================
   return (
     <>
       {/* Hero Section */}
@@ -75,8 +201,7 @@ const Contact = () => {
                     Get in Touch
                   </h1>
                   <p className="text-white">
-                    We’re here to help you find exceptional talent and
-                    consulting solutions.
+                    We’re here to help you find exceptional talent and consulting solutions.
                   </p>
                 </div>
               </div>
@@ -90,24 +215,22 @@ const Contact = () => {
         <div className="container">
           <Titles text="Contact Us" />
           <h3 className="sub-title text-black mb-5 text-center">
-           Fill out the form to connect with us.
+            Fill out the form to connect with us.
           </h3>
 
           <div className="row g-3">
             {/* Left side contact info */}
             <div className="col-12 col-md-6">
-              <h2 className=" sub-heading fw-semibold mb-4">Talk to us about:</h2>
-              <ul className='ul_about nav d-flex flex-column  gap-1 mb-3'>
-                      <li ><p >Cloud & Digital Platforms</p></li>
-                      <li><p >ERP & CRM Solutions (SAP, Salesforce, Microsoft)</p></li>
-                      <li><p >Business Process Consulting</p></li>
-                      <li><p >GIS & Data Analytics</p></li>
-                    </ul>
+              <h2 className="sub-heading fw-semibold mb-4">Talk to us about:</h2>
+              <ul className="ul_about nav d-flex flex-column gap-1 mb-3">
+                <li><p>Cloud & Digital Platforms</p></li>
+                <li><p>ERP & CRM Solutions (SAP, Salesforce, Microsoft)</p></li>
+                <li><p>Business Process Consulting</p></li>
+                <li><p>GIS & Data Analytics</p></li>
+              </ul>
               <div className="card border-primary p-2 rounded-3">
                 <div className="card-body card-body-clr rounded-3">
-                  <h3 className="sub-heading mb-2 fw-semibold">
-                    Contact Information
-                  </h3>
+                  <h3 className="sub-heading mb-2 fw-semibold">Contact Information</h3>
                   <ul className="d-flex nav flex-column gap-2">
                     <li className="d-flex align-items-center gap-2">
                       <p className="text-black mb-0">General inquiries:</p>
@@ -142,31 +265,34 @@ const Contact = () => {
             <div className="col-12 col-md-6">
               <div className="card rounded-3">
                 <div className="card-body p-4">
-                  <form onSubmit={handleSubmit}>
+                  {errors.api && <div className="alert alert-danger">{errors.api}</div>}
+                  <form onSubmit={handleSubmit} noValidate>
                     <div className="row g-3">
                       <div className="col-md-6">
                         <label className="form-label">Name</label>
                         <input
                           type="text"
-                          className="form-control"
+                          className={`form-control ${errors.name ? "is-invalid" : ""}`}
                           name="name"
-                          placeholder="Enter your name"
                           value={formData.name}
-                          onChange={handleChange}
+                          onChange={handleNameChange}
+                          placeholder="Enter your name"
                           required
                         />
+                        <div className="invalid-feedback">{errors.name}</div>
                       </div>
                       <div className="col-md-6">
                         <label className="form-label">Email</label>
                         <input
                           type="email"
-                          className="form-control"
+                          className={`form-control ${errors.email ? "is-invalid" : ""}`}
                           name="email"
-                          placeholder="Enter your email"
                           value={formData.email}
-                          onChange={handleChange}
+                          onChange={handleEmailChange}
+                          placeholder="Enter your email"
                           required
                         />
+                        <div className="invalid-feedback">{errors.email}</div>
                       </div>
                     </div>
 
@@ -175,44 +301,52 @@ const Contact = () => {
                         <label className="form-label">Phone</label>
                         <input
                           type="tel"
-                          className="form-control"
+                          className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                           name="phone"
-                          placeholder="Enter your phone number"
                           value={formData.phone}
-                          onChange={handleChange}
+                          onChange={handlePhoneChange}
+                          placeholder="Enter your phone number"
+                          required
                         />
+                        <div className="invalid-feedback">{errors.phone}</div>
                       </div>
+
                       <div className="col-md-6">
-                        <label className="form-label">
-                          Service Interested In
-                        </label>
+                        <label className="form-label">Service Interested In</label>
                         <Select
                           options={serviceOptions}
                           value={formData.service}
                           onChange={handleSelectChange}
                           placeholder="Choose a service"
+                          className={errors.service ? "is-invalid" : ""}
                         />
+                        {errors.service && (
+                          <div className="text-danger small mt-1">{errors.service}</div>
+                        )}
                       </div>
                     </div>
 
                     <div className="mt-3">
                       <label className="form-label">Message</label>
                       <textarea
-                        className="form-control"
-                        rows="4"
+                        className={`form-control ${errors.message ? "is-invalid" : ""}`}
                         name="message"
-                        placeholder="Write your message..."
                         value={formData.message}
-                        onChange={handleChange}
-                      ></textarea>
+                        onChange={handleMessageChange}
+                        rows="4"
+                        placeholder="Write your message..."
+                        required
+                      />
+                      <div className="invalid-feedback">{errors.message}</div>
                     </div>
 
                     <div className="text-center mt-4">
                       <button
                         type="submit"
                         className="btn btn-primary rounded-pill px-5 py-2 fw-semibold"
+                        disabled={loading}
                       >
-                        Send Message
+                        {loading ? "Sending..." : "Send Message"}
                       </button>
                     </div>
                   </form>
@@ -222,98 +356,39 @@ const Contact = () => {
           </div>
         </div>
       </section>
-       {/* locations */}
-            <section className='py-5'>
-              <div className=' container'>
-                <Titles text="locations" />
-                <h3 className='sub-title text-center text-black mb-4'>Our Operations</h3>
-                <div className='row g-3 flex-wrap'>
-                  <div className='col'>
-                    <div className='outer_country_card text-center'>
-                      <div className='flag_icons'>
-                        <span className="fi fi-us display-1"></span>
-                      </div>
-                      <h2 className='fw-bold sub-heading mt-2 mb-1'>USA</h2>
-                      <p className="fs-14 white-space-no">Elitevet Tech USA</p>
-                    </div>
-                  </div>
-                  <div className='col'>
-                    <div className='outer_country_card text-center'>
-                      <div className='flag_icons'>
-                        <span className="fi fi-in display-1"></span>
-                      </div>
-                      <h2 className='fw-bold sub-heading mt-2 mb-1'>India</h2>
-                      <p className="fs-14 white-space-no">Elitevet Tech India</p>
-                    </div>
-                  </div>
-                  <div className='col'>
-                    <div className='outer_country_card text-center'>
-                      <div className='flag_icons'>
-                        <span className="fi fi-ae display-1"></span>
-                      </div>
-                      <h2 className='fw-bold sub-heading mt-2 mb-1'>Dubai</h2>
-                      <p className="fs-14 white-space-no">Elitevet Tech Dubai</p>
-                    </div>
-                  </div>
-                  <div className='col'>
-                    <div className='outer_country_card text-center'>
-                      <div className='flag_icons'>
-                        <span className="fi fi-sg display-1"></span>
-                      </div>
-                      <h2 className='fw-bold sub-heading mt-2 mb-1'>Singapore</h2>
-                      <p className="fs-14 white-space-no">Elitevet Tech Singapore</p>
-                    </div>
-                  </div>
-                  <div className='col'>
-                    <div className='outer_country_card text-center'>
-                      <div className='flag_icons'>
-                        <span className="fi fi-ph display-1"></span>
-                      </div>
-                      <h2 className='fw-bold sub-heading mt-2 mb-1'>Philippines</h2>
-                      <p className="fs-14 white-space-no">Elitevet Tech Philippines</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-            {/* locations */}
 
-      {/* Success Modal (Bootstrap + Framer Motion) */}
+      {/* Success Modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div
             className="modal fade show d-block"
-            style={{
-              backgroundColor: "rgba(0,0,0,0.6)",
-            }}
+            style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <div className="modal-dialog modal-dialog-centered">
               <motion.div
-                className="modal-content"
+                className="modal-content border-primary p-2 rounded-3 "
                 initial={{ scale: 0.8, opacity: 0, y: -50 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.8, opacity: 0, y: -50 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="modal-body text-center">
+                <div className="modal-body text-center card-body-clr rounded-3">
                   <div className="icon_sc_outer display-3 text-success">
                     <i className="fa-solid fa-circle-check"></i>
                   </div>
-                  
-                  <p className="sub-heading fw-semibold">
+                  <h2 className=" sub-title text-dark fs-3 fw-medium mb-4 lh-sm">
                     Thank you for contacting us. We’ll get back to you soon.
-                  </p>
-                   <button
+                  </h2>
+                  <button
                     className="btn btn-primary px-4 py-2"
                     onClick={() => setShowModal(false)}
                   >
                     Ok
                   </button>
                 </div>
-               
               </motion.div>
             </div>
           </motion.div>

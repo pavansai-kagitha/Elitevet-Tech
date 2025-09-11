@@ -2,6 +2,7 @@ import React from 'react'
 import heroImg from "../../../assets/Herobg.webp"
 import { Titles } from '../../Common/Titles'
 import "../AboutUs/about.css";
+import { Link } from 'react-router-dom';
 
 const WeDo = [
   {
@@ -391,7 +392,7 @@ const About = () => {
                   <p>800+ companies choose Elitevet Tech.</p>
                 </div>
                 <div className=' flex-grow-1'>
-                  <a href="#?" className='btn btn-dark d-block btn-sm'>View More</a>
+                    <Link to="/testimonials" className='btn btn-dark d-block btn-sm'>View More</Link>
                 </div>
 
               </div>
