@@ -7,14 +7,18 @@ import Service from '../services/Service';
 import { Titles } from '../../Common/Titles';
 import { Link } from 'react-router-dom';
 import Button from '../../Common/Buttons/Button';
+import test1 from "../../../assets/identity/test_1.png";
+import test2 from "../../../assets/identity/test_2.png";
+import test3 from "../../../assets/identity/test_3.png";
+import test4 from "../../../assets/identity/test_4.png";
+import test5 from "../../../assets/identity/test_5.png";
+import test6 from "../../../assets/identity/test_6.png";
+import test7 from "../../../assets/identity/test_7.png";
 
-const logos = [
-  "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2024/05/calitgroup-sba-veteran-owned-v2.png",
-  "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2024/12/Top-Managed-Service-Provider-Orange-County-2024.png",
-  "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2023/03/0004_upcity.png",
-  "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2023/03/0000_CISSP.png",
-  "https://cdn-ikppifh.nitrocdn.com/KFQXVFcYhiTYihMSBBFFEzTRjqmFZAWs/assets/images/optimized/rev-73ee50a/calitgroup.com/wp-content/uploads/2025/03/Cloud-Tango-MSP-US-Select-2025-Badge-v2.png",
-];
+const logos = [test1, test2, test3, test4, test5, test6, test7];
+
+
+
 const industries = [
   {
     id: crypto.randomUUID(),

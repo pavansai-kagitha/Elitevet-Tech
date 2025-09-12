@@ -13,6 +13,7 @@ const Contact = () => {
     phone: "",
     message: "",
     service: null,
+    contact_type: null,
   });
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -23,6 +24,10 @@ const Contact = () => {
     { value: "consulting", label: "Consulting" },
     { value: "cloud", label: "Cloud Solutions" },
     { value: "sap", label: "SAP Services" },
+  ];
+    const contactType = [
+    { value: "Company", label: "Company" },
+    { value: "individual", label: "Individual" },
   ];
 
   // ================== Handlers ==================
@@ -102,6 +107,14 @@ const Contact = () => {
     });
   };
 
+    const handleContactType = (contactType) => {
+    setFormData({ ...formData, contact_type: contactType });
+    setErrors({
+      ...errors,
+      contact_type: contactType ? "" : "Please select a service",
+    });
+  };
+
   // Validate all fields before submit
   const validateForm = () => {
     const newErrors = {};
@@ -124,6 +137,7 @@ const Contact = () => {
       newErrors.message = "Message must be at least 5 characters";
 
     if (!formData.service) newErrors.service = "Please select a service";
+    if (!formData.contact_type) newErrors.contact_type = "Please select a contact type";
 
     setErrors(newErrors);
 
@@ -144,6 +158,7 @@ const Contact = () => {
         phone: formData.phone,
         message: formData.message,
         service: formData.service?.value || null,
+        contact_type: formData.contact_type?.value || null,
       };
 
       await axios.post(
@@ -160,6 +175,7 @@ const Contact = () => {
         phone: "",
         message: "",
         service: null,
+        contact_type: null,
       });
       setErrors({});
     } catch (error) {
@@ -268,6 +284,21 @@ const Contact = () => {
                   {errors.api && <div className="alert alert-danger">{errors.api}</div>}
                   <form onSubmit={handleSubmit} noValidate>
                     <div className="row g-3">
+                       <div className="col-md-6">
+                        <label className="form-label">Contact Type <span className="text-danger">*</span></label>
+                        <Select
+                          options={contactType}
+                          value={formData.contact_type}
+                          onChange={handleContactType}
+                          placeholder="Choose a service"
+                          className={errors.contact_type ? "is-invalid" : ""}
+                        />
+                        {errors.contact_type && (
+                          <div className="text-danger small mt-1">{errors.contact_type}</div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="row g-3 mt-1">
                       <div className="col-md-6">
                         <label className="form-label">Name</label>
                         <input
@@ -312,7 +343,7 @@ const Contact = () => {
                       </div>
 
                       <div className="col-md-6">
-                        <label className="form-label">Service Interested In</label>
+                        <label className="form-label">Service Interested In <span className="text-danger">*</span></label>
                         <Select
                           options={serviceOptions}
                           value={formData.service}
@@ -327,7 +358,7 @@ const Contact = () => {
                     </div>
 
                     <div className="mt-3">
-                      <label className="form-label">Message</label>
+                      <label className="form-label">Message <span className="text-danger">*</span></label>
                       <textarea
                         className={`form-control ${errors.message ? "is-invalid" : ""}`}
                         name="message"

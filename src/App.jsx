@@ -35,7 +35,7 @@ function App() {
           <Route path="/testimonials" element={<MotionWrapper keyId={location.pathname}><Testimonials/></MotionWrapper>}/>
           <Route path="/partners" element={<MotionWrapper keyId={location.pathname}><Partners/></MotionWrapper>}/>
           <Route path="/contact" element={<MotionWrapper keyId={location.pathname}><Contact/></MotionWrapper>}/>
-          <Route path="/careers/apply/:jobId" element={<MotionWrapper keyId={location.pathname}><Jobapply/></MotionWrapper>}/>
+          <Route path="/careers/apply/:jobId/:jobTitle" element={<MotionWrapper keyId={location.pathname}><Jobapply/></MotionWrapper>}/>
          <Route path="/services/:serviceId" element={<MotionWrapper keyId={location.pathname}><ServicesPage/></MotionWrapper>}/>
          <Route path="/services/:categoryId/:serviceId" element={<MotionWrapper keyId={location.pathname}><ServicesPage/></MotionWrapper>} />
          <Route path="*" element={<MotionWrapper keyId={location.pathname}><NotFound/></MotionWrapper>} />
