@@ -2,12 +2,18 @@ import React from 'react'
 import "../Footer/footer.css";
 import { Titles } from '../Titles';
 import Button from '../Buttons/Button';
-import { Link } from 'react-router-dom';
+import { Link,useLocation  } from 'react-router-dom';
 
 const Footer = () => {
+      const location = useLocation();
+
+  // Example: hide CTA on /contact page
+  const showCTA = location.pathname !== '/contact';
     return (
+        
 <>
-        {/* // cta section start */}
+ {showCTA && (
+       
         <section className="bg-primary py-5 bg-strips">
            
             <div className="container text-center">
@@ -17,6 +23,7 @@ const Footer = () => {
 
             </div>
         </section>
+ )}
         {/* // cta section end */}
         {/* // footer section  */}
         <section className='bg-black py-5'>

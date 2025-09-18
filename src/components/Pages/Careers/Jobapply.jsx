@@ -135,29 +135,31 @@ const Jobapply = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!job) return;
-    if (!validateForm()) return;
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!job) return;
+  if (!validateForm()) return;
 
-    setSubmitting(true);
+  setSubmitting(true);
 
-    const form = new FormData();
-    form.append("role_name", job.job_title);
-    form.append("full_name", formData.full_name);
-    form.append("email", formData.email);
-    form.append("phone_number", formData.phone_number);
-    form.append("experience", formData.experience);
-    form.append("cover_letter", formData.cover_letter);
-    form.append("resume", formData.resume);
+  const form = new FormData();
+  form.append("job_post_id", job.id); 
+  // form.append("role_name", job.job_title);
+  form.append("full_name", formData.full_name);
+  form.append("email", formData.email);
+  form.append("phone_number", formData.phone_number);
+  form.append("experience", formData.experience);
+  form.append("cover_letter", formData.cover_letter);
+  form.append("resume", formData.resume);
+  try {
+    const response = await axios.post(
+      "https://cloudifai.com/elitevet-tech/api/post_job_application",
+      form,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
 
-    try {
-      await axios.post(
-        "https://cloudifai.com/elitevet-tech/api/post_job_application",
-        form,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
+    if (response.status === 201) {
+      //  Success
       setShowSuccess(true);
 
       // reset form and resume input
@@ -170,16 +172,24 @@ const Jobapply = () => {
         resume: null,
       });
       setErrors({});
-      setFileKey(Date.now()); // ✅ reset file input
+      setFileKey(Date.now()); // reset file input
 
       setTimeout(() => navigate("/careers"), 2000);
-    } catch (error) {
-      setErrors({ api: "Submission failed. Please try again." });
-      console.error("Submission Error:", error.response?.data || error.message);
-    } finally {
-      setSubmitting(false);
     }
-  };
+  }  catch (error) {
+  if (error.response?.status === 409) {
+    // Duplicate email/job application
+    setErrors({ ...errors, api: error.response.data.message || "You have already applied for this job." });
+  } else {
+    setErrors({ ...errors, api: "Submission failed. Please try again." });
+  }
+  console.error("Submission Error:", error.response?.data || error.message);
+} finally {
+  setSubmitting(false);
+}
+
+};
+
 
   if (loading)
     return <Spinner animation="border" className="d-block mx-auto my-5" />;
@@ -197,7 +207,7 @@ const Jobapply = () => {
             <div className="pb-5">
           <div className="row g-3 align-items-center justify-content-center">
             <div className="col-12 col-lg-8 text-center">
-             <div class="content_outer text-center my-4 "><h1 class="text-white display-5 fw-bold font-primary">Join Our Team &amp; Build the Future with Us</h1></div>
+             <div className="content_outer text-center my-4 "><h1 className="text-white display-5 fw-bold font-primary">Join Our Team &amp; Build the Future with Us</h1></div>
             </div>
           </div>
           </div>
@@ -214,7 +224,7 @@ const Jobapply = () => {
               </Link>
               <div className="job_details mt-4">
                 <h2 className="mb-3 sub-heading fw-semibold fs-2">
-                  Apply for {job.job_title}
+                  Apply for {job.job_title} 
                 </h2>
                 <p className="mb-1">{job.description}</p>
                 <p>{job.requirements}</p>
@@ -295,7 +305,7 @@ const Jobapply = () => {
                     {/* Resume */}
                     <Form.Group className="mb-3">
                       <Form.Label>
-                        Resume <span className="fs-14 fw-medium text-danger"> (Max 2MB)</span>
+                        Resume <span className="fs-14 fw-medium text-danger">(Max 2MB, .pdf, .doc, .docx)</span>
                       </Form.Label>
                       <Form.Control
                         key={fileKey} // <-- reset input after submit

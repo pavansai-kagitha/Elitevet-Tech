@@ -14,18 +14,50 @@ const Contact = () => {
     message: "",
     service: null,
     contact_type: null,
+    privacy_policy: false,
   });
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const serviceOptions = [
-    { value: "staffing", label: "IT Staffing" },
-    { value: "consulting", label: "Consulting" },
-    { value: "cloud", label: "Cloud Solutions" },
-    { value: "sap", label: "SAP Services" },
-  ];
-    const contactType = [
+  // const serviceOptions = [
+  //   { value: "staffing", label: "IT Staffing" },
+  //   { value: "consulting", label: "Consulting" },
+  //   { value: "cloud", label: "Cloud Solutions" },
+  //   { value: "sap", label: "SAP Services" },
+  // ];
+  const [serviceOptions, setServiceOptions] = useState([]); // from API
+  const [loadingServices, setLoadingServices] = useState(true);
+
+  // Fetch services from API
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await axios.get(
+          "https://cloudifai.com/elitevet-tech/api/get_in_touch_service_interest"
+        );
+
+        if (res.data && Array.isArray(res.data.data)) {
+          const options = res.data.data.map((item) => ({
+            value: item.service_name,
+            label: item.service_name,
+          }));
+          setServiceOptions(options);
+        } else {
+          console.error("Invalid API response", res.data);
+        }
+      } catch (err) {
+        console.error("Error fetching services", err);
+      } finally {
+        setLoadingServices(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+
+  const contactType = [
     { value: "Company", label: "Company" },
     { value: "individual", label: "Individual" },
   ];
@@ -56,8 +88,8 @@ const Contact = () => {
         !value
           ? "Email is required"
           : /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-          ? ""
-          : "Invalid email format",
+            ? ""
+            : "Invalid email format",
     }));
   };
 
@@ -86,6 +118,7 @@ const Contact = () => {
     }));
   };
 
+
   const handleMessageChange = (e) => {
     let value = e.target.value.replace(/https?:\/\/\S+/gi, "");
     if (value.length > 500) value = value.slice(0, 500);
@@ -107,13 +140,36 @@ const Contact = () => {
     });
   };
 
-    const handleContactType = (contactType) => {
-    setFormData({ ...formData, contact_type: contactType });
+  const handleContactType = (value) => {
+    setFormData({ ...formData, contact_type: value });
     setErrors({
       ...errors,
-      contact_type: contactType ? "" : "Please select a service",
+      contact_type: value ? "" : "Please select a service",
     });
   };
+
+  // const handlePrivacy = (checked) => {
+  //   setFormData({ ...formData, privacy_policy: checked });
+
+  //   setErrors({
+  //     ...errors,
+  //     privacy_policy: checked ? "" : "You must agree to the Privacy Notice",
+  //   });
+  // };
+  const handlePrivacy = (checked) => {
+    const value = checked
+      ? "I understand that Elitevet Tech will protect my data as outlined in the Privacy Notice"
+      : ""; // empty when unchecked
+
+    setFormData({ ...formData, privacy_policy: value });
+
+    setErrors({
+      ...errors,
+      privacy_policy: value ? "" : "You must agree to the Privacy Notice",
+    });
+  };
+
+
 
   // Validate all fields before submit
   const validateForm = () => {
@@ -138,6 +194,8 @@ const Contact = () => {
 
     if (!formData.service) newErrors.service = "Please select a service";
     if (!formData.contact_type) newErrors.contact_type = "Please select a contact type";
+    if (!formData.privacy_policy) newErrors.privacy_policy = "You must agree to the Privacy Notice";
+
 
     setErrors(newErrors);
 
@@ -158,7 +216,8 @@ const Contact = () => {
         phone: formData.phone,
         message: formData.message,
         service: formData.service?.value || null,
-        contact_type: formData.contact_type?.value || null,
+        contact_type: formData.contact_type || null,
+        privacy_policy: formData.privacy_policy || false,
       };
 
       await axios.post(
@@ -176,6 +235,7 @@ const Contact = () => {
         message: "",
         service: null,
         contact_type: null,
+        privacy_policy: false,
       });
       setErrors({});
     } catch (error) {
@@ -284,15 +344,35 @@ const Contact = () => {
                   {errors.api && <div className="alert alert-danger">{errors.api}</div>}
                   <form onSubmit={handleSubmit} noValidate>
                     <div className="row g-3">
-                       <div className="col-md-6">
-                        <label className="form-label">Contact Type <span className="text-danger">*</span></label>
-                        <Select
-                          options={contactType}
-                          value={formData.contact_type}
-                          onChange={handleContactType}
-                          placeholder="Choose a service"
-                          className={errors.contact_type ? "is-invalid" : ""}
-                        />
+                      {/* Contact Type (Radio Buttons) */}
+                      <div className="col-md-6">
+                        <label className="form-label">
+                          Contact Type <span className="text-danger">*</span>
+                        </label>
+                        <div
+                          className={`p-2 rounded form-control  ${errors.contact_type ? "border-danger is-invalid" : "border-secondary"
+                            }`}
+                        >
+                          {contactType.map((option) => (
+                            <div className="form-check form-check-inline" key={option.value}>
+                              <input
+                                type="radio"
+                                className="form-check-input"
+                                id={`contact_type_${option.value}`}
+                                name="contact_type"
+                                value={option.value}
+                                checked={formData.contact_type === option.value}
+                                onChange={(e) => handleContactType(e.target.value)}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={`contact_type_${option.value}`}
+                              >
+                                {option.label}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
                         {errors.contact_type && (
                           <div className="text-danger small mt-1">{errors.contact_type}</div>
                         )}
@@ -300,7 +380,8 @@ const Contact = () => {
                     </div>
                     <div className="row g-3 mt-1">
                       <div className="col-md-6">
-                        <label className="form-label">Name</label>
+                        <label className="form-label">{formData.contact_type === "Company" ? "Company Name" : "Full Name"}
+                        </label>
                         <input
                           type="text"
                           className={`form-control ${errors.name ? "is-invalid" : ""}`}
@@ -313,7 +394,7 @@ const Contact = () => {
                         <div className="invalid-feedback">{errors.name}</div>
                       </div>
                       <div className="col-md-6">
-                        <label className="form-label">Email</label>
+                        <label className="form-label"> {formData.contact_type === "Company" ? "Company Email" : "Personal Email"}</label>
                         <input
                           type="email"
                           className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -326,7 +407,6 @@ const Contact = () => {
                         <div className="invalid-feedback">{errors.email}</div>
                       </div>
                     </div>
-
                     <div className="row g-3 mt-1">
                       <div className="col-md-6">
                         <label className="form-label">Phone</label>
@@ -346,6 +426,7 @@ const Contact = () => {
                         <label className="form-label">Service Interested In <span className="text-danger">*</span></label>
                         <Select
                           options={serviceOptions}
+                          isLoading={loadingServices}
                           value={formData.service}
                           onChange={handleSelectChange}
                           placeholder="Choose a service"
@@ -370,6 +451,23 @@ const Contact = () => {
                       />
                       <div className="invalid-feedback">{errors.message}</div>
                     </div>
+                    <div className="form-check mt-3">
+                      <input
+                        className={`form-check-input ${errors.privacy_policy ? "is-invalid" : ""}`}
+                        type="checkbox"
+                        id="checkDefault"
+                        checked={!!formData.privacy_policy}
+                        onChange={(e) => handlePrivacy(e.target.checked)}
+                      />
+                      <label className="form-check-label" htmlFor="checkDefault">
+                        I understand that Elitevet Tech will protect my data as outlined in the Privacy Notice
+                      </label>
+                      {errors.privacy_policy && (
+                        <div className="text-danger small mt-1">{errors.privacy_policy}</div>
+                      )}
+                    </div>
+
+
 
                     <div className="text-center mt-4">
                       <button

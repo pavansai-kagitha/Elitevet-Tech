@@ -12,8 +12,8 @@ const CareersPage = () => {
     const [jobData, setJobData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
-    const [locationFilter, setLocationFilter] = useState(null);
-    const [techFilter, setTechFilter] = useState(null);
+    const [locationFilter, setLocationFilter] = useState([]); //make it an array
+    const [techFilter, setTechFilter] = useState([]); // make it an array
 
     // Fetch job data from API
     useEffect(() => {
@@ -30,13 +30,13 @@ const CareersPage = () => {
         fetchJobs();
     }, []);
 
-    // Filter out expired jobs first
+    // Filter out expired jobs
     const activeJobs = useMemo(() => {
         const now = new Date();
         return jobData.filter((job) => !job.expires_at || new Date(job.expires_at) > now);
     }, [jobData]);
 
-    // Memoized filter options (only from active jobs)
+    // Unique options for dropdowns
     const locationOptions = useMemo(
         () => [...new Set(activeJobs.map((job) => job.location))].map((loc) => ({ value: loc, label: loc })),
         [activeJobs]
@@ -47,12 +47,29 @@ const CareersPage = () => {
         [activeJobs]
     );
 
-    // Filtered jobs based on search, filters, and expiry
+    // Apply filters
     const filteredJobs = useMemo(() => {
         return activeJobs.filter((job) => {
-            const matchesSearch = job.job_title.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesLocation = !locationFilter || job.location === locationFilter.value;
-            const matchesTech = !techFilter || job.requirements.toLowerCase().includes(techFilter.value.toLowerCase());
+            const search = searchTerm.toLowerCase();
+            const matchesSearch =
+                job.job_title.toLowerCase().includes(search) ||
+                job.requirements.toLowerCase().includes(search);
+            // const matchesSearch = job.job_title.toLowerCase().includes(searchTerm.toLowerCase());
+
+            //  multiple locations
+            const matchesLocation =
+                locationFilter.length === 0
+                    ? true
+                    : locationFilter.some((loc) => job.location === loc.value);
+
+            // multiple techs
+            const matchesTech =
+                techFilter.length === 0
+                    ? true
+                    : techFilter.some((tech) =>
+                        job.requirements.toLowerCase().includes(tech.value.toLowerCase())
+                    );
+
             return matchesSearch && matchesLocation && matchesTech;
         });
     }, [activeJobs, searchTerm, locationFilter, techFilter]);
@@ -77,7 +94,6 @@ const CareersPage = () => {
                 </div>
             </section>
 
-
             {/* Job Filters + Listings */}
             <section className="bg-white py-5">
                 <Container>
@@ -100,8 +116,9 @@ const CareersPage = () => {
                                 <Select
                                     options={locationOptions}
                                     value={locationFilter}
-                                    onChange={setLocationFilter}
+                                    onChange={(selected) => setLocationFilter(selected || [])} // lways array
                                     isClearable
+                                    isMulti // enable multiple select
                                     placeholder="Filter by Location"
                                 />
                             </Col>
@@ -110,8 +127,9 @@ const CareersPage = () => {
                                 <Select
                                     options={techOptions}
                                     value={techFilter}
-                                    onChange={setTechFilter}
+                                    onChange={(selected) => setTechFilter(selected || [])} // always array
                                     isClearable
+                                    isMulti //enable multiple select
                                     placeholder="Filter by Technology"
                                 />
                             </Col>
@@ -129,7 +147,6 @@ const CareersPage = () => {
                                 {filteredJobs.length > 0 ? (
                                     filteredJobs.map((job) => {
                                         const jobURL = `/careers/apply/${job.id}/${formatTitleForURL(job.job_title)}`;
-                                        // const jobURL = `/careers/apply/${formatTitleForURL(job.job_title)}`;
                                         return (
                                             <Col
                                                 md={6}
@@ -144,16 +161,19 @@ const CareersPage = () => {
                                             >
                                                 <Card className="h-100 shadow-sm rounded-3">
                                                     <Card.Body className="pb-1">
-                                                        <Card.Title className="sub-heading mb-2 fw-semibold">
+                                                        <Card.Title className="sub-heading mb-2 fw-semibold ">
                                                             {job.job_title}
                                                         </Card.Title>
-                                                        <Card.Subtitle className="mb-2 fs-14 fw-normal">
+                                                        <Card.Subtitle className="mb-2 fs-14 fw-normal line-clamp-1 ">
                                                             {job.location} • {job.requirements}
                                                         </Card.Subtitle>
-                                                        <p className="mb-3">{job.description}</p>
-
+                                                        <p className="mb-3 line-clamp-2">{job.description}</p>
                                                     </Card.Body>
                                                     <CardFooter className="bg-white border-0 rounded-bottom-3">
+                                                        <div className="d-flex align-items-center gap-2 mb-2 justify-content-end">
+                                                            <i className="bi bi-buildings fs-5 text-info"></i>
+                                                            <p>{job.company_name}</p>
+                                                        </div>
                                                         <div className=" d-flex align-items-center justify-content-between">
                                                             <Button
                                                                 variant="primary"
@@ -162,12 +182,18 @@ const CareersPage = () => {
                                                             >
                                                                 Apply Now
                                                             </Button>
-                                                            {/* <p>Created: {job.created_at.split("T")[0]}</p> */}
-                                                            <p><i className="bi bi-calendar2-check-fill"></i> &nbsp;{new Date(job.created_at).toLocaleDateString("en-GB", {
-                                                                day: "2-digit",
-                                                                month: "short",
-                                                                year: "numeric",
-                                                            })}</p>
+                                                            <p>
+                                                                <i className="bi bi-calendar4-range"></i> &nbsp;
+                                                                {new Date(job.created_at).toLocaleDateString("en-GB", {
+                                                                    day: "2-digit",
+                                                                    month: "short",
+                                                                })}
+                                                                &nbsp; - &nbsp;
+                                                                {new Date(job.expires_at).toLocaleDateString("en-GB", {
+                                                                    day: "2-digit",
+                                                                    month: "short",
+                                                                })}
+                                                            </p>
                                                         </div>
                                                     </CardFooter>
                                                 </Card>
