@@ -64,9 +64,9 @@ const About = () => {
   return (
     <>
       <section className="bg-black position-relative d-flex align-items-center">
-        <div className=" w-100 h-100 position-absolute top-0 start-0">
-          <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover
-          " />
+        <div className=" w-100 h-100 position-absolute top-0 start-0 bg-grd-3">
+          {/* <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover
+          " /> */}
         </div>
 
         <div className="container position-relative z-3 pt-lg-8 pb-lg-1 pb-4">
@@ -74,7 +74,7 @@ const About = () => {
             <div className="row g-3 align-items-center justify-content-center">
               <div className="col-12 col-lg-8 ">
                 <div className="content_outer text-center my-4 ">
-                  <h1 className="text-white display-5 fw-bold font-primary">
+                  <h1 className="text-white display-5 fw-semibold font-primary">
                     Empowering businesses with talent and transformation.
                   </h1>
                 </div>
@@ -387,12 +387,12 @@ const About = () => {
             <div style={{ backgroundColor: "#0e0f13" }} className='cta-view-more-test  d-inline-block rounded-3 p-2'>
               <div className='d-flex flex-wrap gap-3 align-items-center'>
                 <div className='d-flex gap-1 align-items-center'>
-                  <button className='btn btn-primary btn-sm'><i className="fa-solid fa-bolt"></i></button>
+                  <button className='btn  bg-clr btn-sm text-white'><i className="fa-solid fa-bolt"></i></button>
                   {/* website logo replace */}
                   <p>800+ companies choose Elitevet Tech.</p>
                 </div>
                 <div className=' flex-grow-1'>
-                    <Link to="/testimonials" className='btn btn-dark d-block btn-sm'>View More</Link>
+                    <Link to="/testimonials" className='btn bg-clr text-white d-block btn-sm'>View More</Link>
                 </div>
 
               </div>

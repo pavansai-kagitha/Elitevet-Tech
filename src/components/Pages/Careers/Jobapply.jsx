@@ -200,14 +200,14 @@ const Jobapply = () => {
     <>
       {/* Hero Section */}
       <section className="bg-black position-relative d-flex align-items-center">
-        <div className="w-100 h-100 position-absolute top-0 start-0">
-          <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover" />
+        <div className="w-100 h-100 position-absolute top-0 start-0 bg-grd-3">
+          {/* <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover" /> */}
         </div>
         <div className="container position-relative z-3 pt-lg-8 pb-lg-1 pb-4">
             <div className="pb-5">
           <div className="row g-3 align-items-center justify-content-center">
             <div className="col-12 col-lg-8 text-center">
-             <div className="content_outer text-center my-4 "><h1 className="text-white display-5 fw-bold font-primary">Join Our Team &amp; Build the Future with Us</h1></div>
+             <div className="content_outer text-center my-4 "><h1 className="text-white display-5 fw-semibold font-primary">Join Our Team &amp; Build the Future with Us</h1></div>
             </div>
           </div>
           </div>
@@ -344,7 +344,7 @@ const Jobapply = () => {
                       >
                         Back
                       </Button>
-                      <Button type="submit" variant="primary" disabled={submitting}>
+                      <Button type="submit" className="bg-pry border-0" disabled={submitting}>
                         {submitting ? "Submitting..." : "Submit"}
                       </Button>
                     </div>

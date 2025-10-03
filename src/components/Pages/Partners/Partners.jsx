@@ -75,19 +75,19 @@ const Partners = () => {
     <>
       {/* Hero Section */}
       <section className="bg-black position-relative d-flex align-items-center">
-        <div className="w-100 h-100 position-absolute top-0 start-0">
-          <img
+        <div className="w-100 h-100 position-absolute top-0 start-0 bg-grd-3">
+          {/* <img
             src={heroImg}
             alt="Hero"
             className="img-fluid w-100 h-100 object-fit-cover"
-          />
+          /> */}
         </div>
         <div className="container position-relative z-3 pt-lg-8 pb-lg-1 pb-4">
           <div className="pb-5">
             <div className="row g-3 align-items-center justify-content-center">
               <div className="col-12 col-lg-8">
                 <div className="content_outer text-center my-4">
-                  <h1 className="text-white display-5 fw-bold font-primary">
+                  <h1 className="text-white display-5 fw-semibold font-primary">
                     Our Trusted Partners
                   </h1>
                   <p className="text-white">
@@ -139,7 +139,7 @@ const Partners = () => {
               <div className='bec_partner_outer text-center'>
                 <Titles text="Become a Partner" />
                 <h2 className='sub-title text-black mb-4'>Join our network of technology <br className='d-none d-lg-block' /> partners and expand your reach</h2>
-                <Button text="Partner with Us" classname="bg-primary text-white" to="/contact"/>
+                <Button text="Partner with Us" classname="bg-pry text-white" to="/contact"/>
               </div>
             </div>
           </div>

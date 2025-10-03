@@ -7,15 +7,11 @@ import Service from '../services/Service';
 import { Titles } from '../../Common/Titles';
 import { Link } from 'react-router-dom';
 import Button from '../../Common/Buttons/Button';
-import test1 from "../../../assets/identity/test_1.png";
-import test2 from "../../../assets/identity/test_2.png";
 import test3 from "../../../assets/identity/test_3.png";
 import test4 from "../../../assets/identity/test_4.png";
-import test5 from "../../../assets/identity/test_5.png";
-import test6 from "../../../assets/identity/test_6.png";
-import test7 from "../../../assets/identity/test_7.png";
 
-const logos = [test1, test2, test3, test4, test5, test6, test7];
+
+const logos = [ test3, test4,test3,test4,test3 ];
 
 
 
@@ -63,13 +59,13 @@ const Home = () => {
           <div className="row g-3">
             <div className="col-12 col-lg-7">
               <div className="content_outer text-start  py-lg-5">
-                <h1 className="text-white display-5 fw-bold font-primary">
+                <h1 className="text-white display-5 fw-semibold font-primary">
                   Empowering Businesses with Talent
                 </h1>
                 <p className="text-white font-sec lead mb-3">
                   EliteVet Tech is Veteran-led. Excellence-driven IT Staffing and consulting solutions for every mission
                 </p>
-                <Button to="/contact" text="Get Started" classname="bg-primary text-white"/>
+                <Button to="/contact" text="Get Started" classname="bg-pry text-white"/>
               </div>
             </div>
             <div className='col-12 col-lg-5'>
@@ -364,12 +360,12 @@ const Home = () => {
             <div style={{ backgroundColor: "#0e0f13" }} className='cta-view-more-test  d-inline-block rounded-3 p-2'>
               <div className='d-flex flex-wrap gap-3 align-items-center'>
                 <div className='d-flex gap-1 align-items-center'>
-                  <button className='btn btn-primary btn-sm'><i className="fa-solid fa-bolt"></i></button>
+                  <button className='btn bg-clr btn-sm text-white'><i className="fa-solid fa-bolt"></i></button>
                   {/* website logo replace */}
                   <p>800+ companies choose Elitevet Tech.</p>
                 </div>
                 <div className=' flex-grow-1'>
-                  <Link to="/testimonials" className='btn btn-dark d-block btn-sm'>View More</Link>
+                  <Link to="/testimonials" className='btn bg-clr text-white d-block btn-sm'>View More</Link>
                 </div>
 
               </div>

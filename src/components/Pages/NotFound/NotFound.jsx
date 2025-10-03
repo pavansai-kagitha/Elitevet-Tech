@@ -7,8 +7,8 @@ import Button from "../../Common/Buttons/Button";
 const NotFound = () => {
   return (
     <section className="bg-black position-relative d-flex align-items-center">
-         <div className=" w-100 h-100 position-absolute top-0 start-0">
-           <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover"/>
+         <div className=" w-100 h-100 position-absolute top-0 start-0 bg-grd-3">
+           {/* <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover"/> */}
          </div>
    
          <div className="container position-relative z-3 pt-lg-8 pb-lg-1 pb-4">
@@ -25,7 +25,7 @@ const NotFound = () => {
                    </p>
 
                   
-                   <Button to="/" classname="btn btn-primary rounded-pill mt-3" text="Back to Home"/>
+                   <Button to="/" classname="btn bg-pry rounded-pill mt-3" text="Back to Home"/>
    
                  </div>
                </div>

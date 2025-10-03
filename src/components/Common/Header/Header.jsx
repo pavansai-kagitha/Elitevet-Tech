@@ -213,7 +213,7 @@ const Header = () => {
           </Navbar.Offcanvas>
           <div className="ms-md-4 ms-2">
             <NavLink className="d-none d-sm-inline-block text-decoration-none" to="/contact">
-              <Button text="Get in Touch" classname="bg-primary text-white" />
+              <Button text="Get in Touch" classname="bg-pry text-white" />
             </NavLink>
             <li className="d-inline-block d-lg-none ms-3 toggle_btn">
               <i className={open ? "bi bi-x-lg" : "bi bi-list"} onClick={toggleMenu}></i>

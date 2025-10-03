@@ -21,9 +21,9 @@ const IndustryInsights = () => {
         <>
             {/* Hero Section */}
             <section className="bg-black position-relative d-flex align-items-center">
-                <div className=" w-100 h-100 position-absolute top-0 start-0">
-                    <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover
-                    " />
+                <div className=" w-100 h-100 position-absolute top-0 start-0 bg-grd-3">
+                    {/* <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover
+                    " /> */}
                 </div>
 
                 <div className="container position-relative z-3 pt-lg-8 pb-lg-1 pb-4">
@@ -31,7 +31,7 @@ const IndustryInsights = () => {
                         <div className="row g-3 align-items-center justify-content-center">
                             <div className="col-12 col-lg-8 ">
                                 <div className="content_outer text-center my-4 ">
-                                    <h1 className="text-white display-5 fw-bold font-primary">
+                                    <h1 className="text-white display-5 fw-semibold font-primary">
                                         Industry Insights in Staffing & IT Consulting
                                     </h1>
                                 </div>
@@ -62,7 +62,7 @@ const IndustryInsights = () => {
                                     <Card className="h-100 shadow-sm rounded-3">
                                         <Card.Body>
                                             <Card.Title className="sub-heading mb-2 fw-semibold ">{insight.title}</Card.Title>
-                                            <Card.Subtitle className="mb-2 badge text-bg-primary">{insight.category}</Card.Subtitle>
+                                            <Card.Subtitle className="mb-2 badge bg-grd-3">{insight.category}</Card.Subtitle>
                                             <p>{insight.description}</p>
                                         </Card.Body>
                                     </Card>
