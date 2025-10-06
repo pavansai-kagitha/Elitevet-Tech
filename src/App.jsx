@@ -14,6 +14,7 @@ import Testimonials from "./components/Pages/Testimonials/Testimonials";
 import Partners from "./components/Pages/Partners/Partners";
 import Contact from "./components/Pages/Contact/Contact";
 import NotFound from "./components/Pages/NotFound/NotFound";
+import CeoBio from "./components/Pages/AboutUs/CeoBio";
 
 
 
@@ -29,6 +30,7 @@ function App() {
        
         <Route path="/" element={<MotionWrapper keyId={location.pathname}><Home/></MotionWrapper>} />
         <Route path="/about" element={<MotionWrapper keyId={location.pathname}><About/></MotionWrapper>}/>
+         <Route path="/ceo-bio" element={<MotionWrapper keyId={location.pathname}><CeoBio/></MotionWrapper>}/>
           <Route path="/operations" element={<MotionWrapper keyId={location.pathname}><Operations/></MotionWrapper>}/>
           <Route path="/careers" element={<MotionWrapper keyId={location.pathname}><CareersPage/></MotionWrapper>}/>
           <Route path="/IndustryInsights" element={<MotionWrapper keyId={location.pathname}><IndustryInsights/></MotionWrapper>}/>

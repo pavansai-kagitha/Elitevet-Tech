@@ -11,7 +11,7 @@ import test3 from "../../../assets/identity/test_3.png";
 import test4 from "../../../assets/identity/test_4.png";
 
 
-const logos = [ test3, test4,test3,test4,test3 ];
+const logos = [test3, test4, test3, test4, test3];
 
 
 
@@ -21,12 +21,14 @@ const industries = [
     icon: "bi bi-tools",
     service: "Utilities",
     description: "Smart grid solutions, energy management systems, and IoT implementations",
+    classNames: "card-imgs-utlis"
   },
   {
     id: crypto.randomUUID(),
     icon: "bi bi-car-front",
     service: "Automobile",
     description: "Connected vehicle technologies, manufacturing automation, and digital transformation",
+    classNames: "card-imgs-automobile"
 
   },
   {
@@ -34,6 +36,7 @@ const industries = [
     icon: "bi bi-gear-wide-connected",
     service: "Manufacturing",
     description: "Supply chain optimization, automation systems, and quality management solutions",
+    classNames: "card-imgs-manufacturing"
 
   },
   {
@@ -41,6 +44,7 @@ const industries = [
     icon: "bi bi-stack",
     service: "Services",
     description: "Digital transformation, cloud migration, and technology consulting services",
+    classNames: "card-imgs-services"
 
   },
 
@@ -65,7 +69,7 @@ const Home = () => {
                 <p className="text-white font-sec lead mb-3">
                   EliteVet Tech is Veteran-led. Excellence-driven IT Staffing and consulting solutions for every mission
                 </p>
-                <Button to="/contact" text="Get Started" classname="bg-pry text-white"/>
+                <Button to="/contact" text="Get Started" classname="bg-pry text-white" />
               </div>
             </div>
             <div className='col-12 col-lg-5'>
@@ -110,15 +114,21 @@ const Home = () => {
         <h3 className='sub-title text-center mb-4'>Delivering tailored solutions across <br className='d-none d-lg-block' /> diverse sectors.</h3>
         <div className='container '>
           <div className='row g-3'>
-            {industries.map(({ id, icon, service, description }) => (
+            {industries.map(({ id, icon, service, description, classNames }) => (
               <div className='col-12 col-lg-6 col-xl-3 ' key={id}>
-                <div className='card h-100 p-1 bg-card-p rounded-3' >
-                  <div className='card-body text-center bg-darks rounded-3'>
-                    <div className='card-icon mb-4'>
-                      <i className={`display-4 ${icon} text-white`}></i>
+                <div className={`card h-100 p-1 bg-card-p rounded-3 card-imgs ${classNames}`} >
+                  <div className='card-body text-center  rounded-3 card-inner'>
+                    <div className='card-front'>
+                      <h3 className='sub-heading mb-3 fw-semibold  text-white'>{service}</h3>
                     </div>
-                    <h3 className='sub-heading mb-3 fw-semibold  text-white'>{service}</h3>
-                    <p className='dark-card-text'>{description}</p>
+                    <div className='card-back'>
+                     <p className='dark-card-text text-white'>{description}</p>
+                    </div>
+                    {/* <div className='card-icon mb-4'>
+                      <i className={`display-4 ${icon} text-white`}></i>
+                    </div> */}
+                    {/* <h3 className='sub-heading mb-3 fw-semibold  text-white'>{service}</h3>
+                    <p className='dark-card-text'>{description}</p> */}
                   </div>
                 </div>
               </div>
@@ -211,11 +221,11 @@ const Home = () => {
       {/* Why Choose EliteVet Tech end */}
       {/* TESTIMONIALS */}
       <section className='py-5 bg-light-gray '>
-       
+
 
         <div className=' container'>
-           <Titles text="TESTIMONIALS" />
-        <h3 className='sub-title text-center text-black mb-4'>See what people say about <br className='d-none d-lg-block' /> EliteVet Tech</h3>
+          <Titles text="TESTIMONIALS" />
+          <h3 className='sub-title text-center text-black mb-4'>See what people say about <br className='d-none d-lg-block' /> EliteVet Tech</h3>
           <div className='testm-section position-relative'>
             <div className='row g-3'>
               <div className='col-12 col-lg-4'>
@@ -376,7 +386,7 @@ const Home = () => {
       </section>
       {/* TESTIMONIALS */}
       {/*  */}
-      
+
     </>
   )
 }

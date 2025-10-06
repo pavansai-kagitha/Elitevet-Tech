@@ -153,13 +153,6 @@ const Header = () => {
                   >
                     Operations
                   </NavDropdown.Item>
-                   <NavDropdown.Item
-                    as={NavLink}
-                    to="/careers"
-                    onClick={handleNavClick}
-                  >
-                    Careers
-                  </NavDropdown.Item>
                   <NavDropdown.Item
                     as={NavLink}
                     to="/partners"
@@ -206,6 +199,11 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
                 {/* resources */}
+                {/* jobs */}
+                <NavLink className="nav-link" to="careers" onClick={handleNavClick}>
+                  Careers
+                </NavLink>
+                {/* jobs */}
 
                
               </Nav>

@@ -31,4 +31,29 @@ color: #0669FD;
     background-position: 50% 40%;
     background-size: cover;
     background-attachment: scroll;
+    background-repeat: no-repeat;
+}
+
+.ceo_card{
+   border-radius: 0.75rem;
+    min-height: 300px;
+    padding-top: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    background-image: url("../../../assets/leadership/Robert-Garcia.webp");
+    background-position: 50% 40%;
+    background-size: cover;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+     filter: grayscale(100%);
+  transition: filter 0.3s ease-in-out;
+}
+.ceo_card:hover {
+  filter: grayscale(0%);
+}
+
+.ceo_bio_info{
+  right: 18px;
+  top: 18px;
 }

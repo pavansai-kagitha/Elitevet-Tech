@@ -125,12 +125,17 @@ const About = () => {
           <h3 className='sub-title text-black mb-4 text-center'>Our leadership</h3>
           <div className='row g-3'>
             <div className='col-12 col-md-6 col-lg-3'>
-              <div className='card people_card'>
+              <div className='card ceo_card position-relative'>
+                <div className=' position-absolute ceo_bio_info' >
+                  <Link to="/ceo-bio">
+                  <i className="bi bi-info-circle-fill text-dark fs-5"></i>
+                  </Link>
+                </div>
                 <div className='card-body p-2 bg-white rounded-3 shadow-sm' style={{ marginTop: "300px" }}>
                   <div className='cards_footer d-flex align-items-center justify-content-between'>
                     <div>
-                      <h2 className='fw-bold'>Sarah Johnson</h2>
-                      <p className='fs-14'>CTO, Tech Solutions Inc</p>
+                      <h2 className='fw-bold'>Robert Garcia</h2>
+                      <p className='fs-14'>CEO, Elitevet Tech</p>
                     </div>
                     <div className='sc_icon'>
                       <i className='fa-brands fa-linkedin fa-xl'></i>

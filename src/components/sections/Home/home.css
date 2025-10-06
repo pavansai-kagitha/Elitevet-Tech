@@ -73,6 +73,88 @@
 .bg-card-p{
   background-color: #767778 ;
 }
+.card-imgs {
+  position: relative;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  height: 250px !important; /* adjust height */
+}
+
+/* Overlay for opacity */
+.card-imgs::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+/* Flip container */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.card-imgs:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Card faces */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  color: #fff;
+  z-index: 1;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Background images */
+.card-imgs-utlis {
+  background-image: url(../../../assets/industries/Utility.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-imgs-automobile {
+  background-image: url(../../../assets/industries/Automobiles-min.jpg);
+  background-size: cover;
+  background-position: center;
+   background-repeat: no-repeat;
+}
+
+.card-imgs-manufacturing {
+  background-image: url(../../../assets/industries/Manufacturing-1-min.jpg);
+  background-size: cover;
+  background-position: center;
+   background-repeat: no-repeat;
+}
+
+.card-imgs-services {
+  background-image: url(../../../assets/industries/Services-min.jpg);
+  background-size: cover;
+  background-position: center;
+   background-repeat: no-repeat;
+}
+
+
+
 
 .section-bg{
   background-color: #323852 ;
@@ -84,6 +166,7 @@
 .bg-light-gray{
   background-color: #f5f7fa;
 }
+
 
 
 
