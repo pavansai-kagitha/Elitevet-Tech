@@ -1,6 +1,7 @@
 import React from 'react'
+import { useEffect, useRef, useState } from "react";
 import "../Home/home.css";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import heroImg from "../../../assets/hero-bg.webp"
 import Carousel from './Carousel';
 import Service from '../services/Service';
@@ -52,6 +53,23 @@ const industries = [
 const Home = () => {
   // Duplicate array so it loops smoothly
   const repeatedLogos = [...logos, ...logos];
+  const containerRef = useRef(null);
+  const [scrollWidth, setScrollWidth] = useState(0);
+
+  useEffect(() => {
+    const updateScrollWidth = () => {
+      if (containerRef.current) {
+        setScrollWidth(containerRef.current.scrollWidth / 2); // half because duplicated
+      }
+    };
+
+    updateScrollWidth();
+    window.addEventListener("resize", updateScrollWidth);
+    return () => window.removeEventListener("resize", updateScrollWidth);
+  }, [repeatedLogos]);
+
+  const speed = 30; // pixels per second
+  const duration = scrollWidth / speed;
   return (
     <>
       <section className="hero_section position-relative d-flex align-items-center">
@@ -81,14 +99,15 @@ const Home = () => {
             <div className='col-12'>
               <div className="overflow-hidden w-100 py-4 ">
                 <motion.div
+                  ref={containerRef}
                   className="d-flex align-items-center gap-5"
-                  animate={{ x: ["0%", "-50%"] }} // only half, since we doubled the array
+                  animate={{ x: [0, -scrollWidth] }}
                   transition={{
                     repeat: Infinity,
-                    repeatType: "loop",
                     ease: "linear",
-                    duration: 20, // adjust speed
+                    duration: duration,
                   }}
+                  style={{ display: "flex" }}
                 >
                   {repeatedLogos.map((src, i) => (
                     <img
@@ -122,13 +141,8 @@ const Home = () => {
                       <h3 className='sub-heading mb-3 fw-semibold  text-white'>{service}</h3>
                     </div>
                     <div className='card-back'>
-                     <p className='dark-card-text text-white'>{description}</p>
+                      <p className='dark-card-text text-white'>{description}</p>
                     </div>
-                    {/* <div className='card-icon mb-4'>
-                      <i className={`display-4 ${icon} text-white`}></i>
-                    </div> */}
-                    {/* <h3 className='sub-heading mb-3 fw-semibold  text-white'>{service}</h3>
-                    <p className='dark-card-text'>{description}</p> */}
                   </div>
                 </div>
               </div>
@@ -150,7 +164,7 @@ const Home = () => {
                 <div className='col-12'>
                   <div className='card  shadow-sm h-100 position-relative'>
                     <div className='card-body '>
-                      <div className='icon-text display-6 text-orange-light position-absolute end-0'>
+                      <div className='icon-text display-6 text-blue-light position-absolute end-0'>
                         <i className="fa-solid fa-user-tie fa-lg"></i>
                       </div>
                       <div className='right-text'>
@@ -165,7 +179,7 @@ const Home = () => {
                 <div className='col-12'>
                   <div className='card  shadow-sm h-100 position-relative'>
                     <div className='card-body '>
-                      <div className='icon-text display-6 text-pink-light position-absolute end-0'>
+                      <div className='icon-text display-6 text-red-light position-absolute end-0'>
                         <i className="fa-solid fa-earth-americas fa-lg"></i>
                       </div>
                       <div className='right-text'>
@@ -180,7 +194,7 @@ const Home = () => {
                 <div className='col-12'>
                   <div className='card  shadow-sm h-100 position-relative'>
                     <div className='card-body '>
-                      <div className='icon-text display-6 text-green-light position-absolute end-0'>
+                      <div className='icon-text display-6 text-mix-light position-absolute end-0'>
                         <i className="fa-solid fa-face-grin-stars fa-lg"></i>
                       </div>
                       <div className='right-text'>

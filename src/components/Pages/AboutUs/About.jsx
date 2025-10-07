@@ -98,7 +98,7 @@ const About = () => {
               <p className='fs-18'>We launched EliteVet Tech from a spark of frustration after witnessing skyrocketing cloud costs at our previous venture, we knew there had to be a better way. That question became our mission: build a solution that automatically optimizes cloud infrastructure and cuts costs, with no manual intervention needed.</p>
             </div>
             <div className='col-12 col-md-5'>
-              <div className='card border-primary p-2 rounded-3'>
+              <div className='card border-dark p-2 rounded-3'>
                 <div className='card-body card-body-clr rounded-3'>
                   <h3 className="sub-heading mb-2 fw-semibold ">Who We Are</h3>
                   <p>We are a team of industry-certified consultants, staffing specialists, and technology advisors who thrive on solving complex challenges.

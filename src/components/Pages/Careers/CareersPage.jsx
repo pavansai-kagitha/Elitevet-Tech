@@ -87,7 +87,7 @@ const CareersPage = () => {
                     <div className="pb-4">
                         <div className="row g-3 align-items-center justify-content-center">
                             <div className="col-12 col-lg-8 text-center my-4">
-                                <h1 className="text-white display-5 fw-semibold font-primary">Explore Current <br  className="d-none d-lg-block"/> Opportunities</h1>
+                                <h1 className="text-white display-5 fw-semibold font-primary">Explore Current <br className="d-none d-lg-block" /> Opportunities</h1>
                             </div>
                         </div>
                     </div>
@@ -171,12 +171,12 @@ const CareersPage = () => {
                                                     </Card.Body>
                                                     <CardFooter className="bg-white border-0 rounded-bottom-3">
                                                         <div className="d-flex align-items-center gap-2 mb-2 justify-content-end">
-                                                            <i className="bi bi-buildings fs-5 text-info"></i>
+                                                            <i className="bi bi-buildings fs-5 text-secondary"></i>
                                                             <p>{job.company_name}</p>
                                                         </div>
                                                         <div className=" d-flex align-items-center justify-content-between">
                                                             <Button
-                                                               
+
                                                                 className="rounded-pill px-3 bg-pry border-0"
                                                                 onClick={() => navigate(jobURL)}
                                                             >

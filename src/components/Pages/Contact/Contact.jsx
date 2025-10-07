@@ -304,7 +304,7 @@ const Contact = () => {
                 <li><p>Business Process Consulting</p></li>
                 <li><p>GIS & Data Analytics</p></li>
               </ul>
-              <div className="card border-primary p-2 rounded-3">
+              <div className="card border-dark p-2 rounded-3">
                 <div className="card-body card-body-clr rounded-3">
                   <h3 className="sub-heading mb-2 fw-semibold">Contact Information</h3>
                   <ul className="d-flex nav flex-column gap-2">

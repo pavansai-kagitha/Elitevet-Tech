@@ -85,17 +85,17 @@
 .text-primary-light{
   background-color: var(--bg-primary-light);
 }
-.text-pink-light{
+.text-red-light{
   
-  color: #e679e6 !important;
+  color: #aa090ad1 !important;
 }
-.text-green-light{
+.text-mix-light{
 
-  color: #47c48a !important;
+  color: #611424f2 !important;
 }
 .text-blue-light{
 
-  color: #9555db !important;
+  color: #181e3dd4 !important;
 }
 
 .text-orange-light{
@@ -104,7 +104,7 @@
 }
 
 .card-body-clr{
-  background-color: #C6E3FF !important;
+  background-color: #181e3d17 !important;
 }
 
 .fs-14{

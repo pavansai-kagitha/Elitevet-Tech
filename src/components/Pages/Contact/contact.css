@@ -1,7 +1,7 @@
 .ul_about li::before{
    font-family: "bootstrap-icons";
  content: "\F272";
-color: #0669FD;
+color: var(--primaryClr);
     font-weight: 400;
     font-size: 22px;
 
