@@ -90,12 +90,27 @@ const Jobapply = () => {
           val.length < 7 || val.length > 15 ? "Enter a valid phone number (7–15 digits)" : "",
       }));
     } else if (id === "experience") {
-      const val = value.replace(/[^0-9]/g, "");
-      setFormData((prev) => ({ ...prev, experience: val }));
-      setErrors((prev) => ({
-        ...prev,
-        experience: !val ? "Experience is required" : "",
-      }));
+      // const val = value.replace(/[^0-9.]/g, "");
+      // if (Number(val) > 100) val = "100";
+      // setFormData((prev) => ({ ...prev, experience: val }));
+      // setErrors((prev) => ({
+      //   ...prev,
+      //   experience: !val ? "Experience is required" : "",
+      // }));
+       let val = value.replace(/[^0-9.]/g, ""); 
+  const parts = val.split(".");
+  if (parts.length > 2) val = parts[0] + "." + parts[1]; // now it's allowed
+  if (Number(val) > 100) val = "100";
+  
+   if (parts.length === 2 && parts[1].length > 1) {
+    val = parts[0] + "." + parts[1].slice(0, 1);
+  }
+  
+  setFormData((prev) => ({ ...prev, experience: val }));
+  setErrors((prev) => ({
+    ...prev,
+    experience: !val ? "Experience is required" : "",
+  }));
     } else if (id === "cover_letter") {
       let val = value.slice(0, 300);
       setFormData((prev) => ({ ...prev, cover_letter: val }));
@@ -291,10 +306,12 @@ const Jobapply = () => {
                         <Form.Label>Experience (years)</Form.Label>
                         <Form.Control
                           type="number"
+                          step="0.1"  
                           id="experience"
+                           max={100}    
                           value={formData.experience}
                           onChange={handleChange}
-                          placeholder="Years of experience"
+                          placeholder="Years of experience (e.g., 1.5)"
                           className={errors.experience ? "is-invalid" : ""}
                           required
                         />
