@@ -249,7 +249,9 @@ const Home = () => {
                     <div className='card '>
                       <div className='outer_card_profile d-flex align-items-center gap-3 border-bottom p-3'>
                         <div className=' rounded-circle bg-secondary-subtle p-1' >
-                          <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="" className='img-fluid align-middle' style={{ height: "50px", width: "50px" }} />
+                           <div className='icons_test rounded-circle d-flex align-items-center justify-content-center'>
+                            <i class="fa-solid fa-user fs-3"></i>
+                          </div>
                         </div>
                         <div>
                           < p className='fw-semibold text-black'>
@@ -268,7 +270,9 @@ const Home = () => {
                       <div className='outer_card_profile d-flex align-items-center  border-bottom p-3 justify-content-between'>
                         <div className='d-flex gap-3'>
                           <div className=' rounded-circle bg-secondary-subtle p-1' >
-                            <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="" className='img-fluid align-middle' style={{ height: "50px", width: "50px" }} />
+                            <div className='icons_test rounded-circle d-flex align-items-center justify-content-center'>
+                            <i class="fa-solid fa-user fs-3"></i>
+                          </div>
                           </div>
                           <div>
                             < p className='fw-semibold text-black'>
@@ -277,7 +281,7 @@ const Home = () => {
                             <p className='fs-14'>CTO, Google</p>
                           </div>
                         </div>
-                        <div className=' rounded-circle text-white bg-success d-flex align-items-center justify-content-center' style={{ height: "50px", width: "50px", fontSize: "11px" }}>Google</div>
+                        <div className=' rounded-circle text-white bg-grd-3 d-flex align-items-center justify-content-center' style={{ height: "50px", width: "50px", fontSize: "11px" }}>Google</div>
                       </div>
                       <div className='card-body p-3'>
                         <p className='font-st' >"EliteVet Tech provided exceptional AWS architects who transformed our cloud infrastructure. Their veteran-led approach brings discipline and excellence to every project."</p>
@@ -294,7 +298,9 @@ const Home = () => {
                     <div className='card '>
                       <div className='outer_card_profile d-flex align-items-center gap-3 border-bottom p-3'>
                         <div className=' rounded-circle bg-secondary-subtle p-1' >
-                          <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="" className='img-fluid align-middle' style={{ height: "50px", width: "50px" }} />
+                          <div className='icons_test rounded-circle d-flex align-items-center justify-content-center'>
+                            <i class="fa-solid fa-user fs-3"></i>
+                          </div>
                         </div>
                         <div>
                           < p className='fw-semibold text-black'>
@@ -313,7 +319,9 @@ const Home = () => {
                       <div className='outer_card_profile d-flex align-items-center  border-bottom p-3 justify-content-between'>
                         <div className='d-flex gap-3'>
                           <div className=' rounded-circle bg-secondary-subtle p-1' >
-                            <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="" className='img-fluid align-middle' style={{ height: "50px", width: "50px" }} />
+                             <div className='icons_test rounded-circle d-flex align-items-center justify-content-center'>
+                            <i class="fa-solid fa-user fs-3"></i>
+                          </div>
                           </div>
                           <div>
                             < p className='fw-semibold text-black'>
@@ -322,7 +330,7 @@ const Home = () => {
                             <p className='fs-14'>CTO, Google</p>
                           </div>
                         </div>
-                        <div className=' rounded-circle text-white bg-success d-flex align-items-center justify-content-center' style={{ height: "50px", width: "50px", fontSize: "11px" }}>Google</div>
+                        <div className=' rounded-circle text-white bg-grd-3 d-flex align-items-center justify-content-center' style={{ height: "50px", width: "50px", fontSize: "11px" }}>Google</div>
                       </div>
                       <div className='card-body p-3'>
                         <p className='font-st' >"EliteVet Tech provided exceptional AWS architects who transformed our cloud infrastructure. Their veteran-led approach brings discipline and excellence to every project."</p>
@@ -339,7 +347,9 @@ const Home = () => {
                     <div className='card '>
                       <div className='outer_card_profile d-flex align-items-center gap-3 border-bottom p-3'>
                         <div className=' rounded-circle bg-secondary-subtle p-1' >
-                          <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="" className='img-fluid align-middle' style={{ height: "50px", width: "50px" }} />
+                           <div className='icons_test rounded-circle d-flex align-items-center justify-content-center'>
+                            <i class="fa-solid fa-user fs-3"></i>
+                          </div>
                         </div>
                         <div>
                           < p className='fw-semibold text-black'>
@@ -358,7 +368,9 @@ const Home = () => {
                       <div className='outer_card_profile d-flex align-items-center  border-bottom p-3 justify-content-between'>
                         <div className='d-flex gap-3'>
                           <div className=' rounded-circle bg-secondary-subtle p-1' >
-                            <img src="https://cdn-icons-png.flaticon.com/512/10337/10337609.png" alt="" className='img-fluid align-middle' style={{ height: "50px", width: "50px" }} />
+                            <div className='icons_test rounded-circle d-flex align-items-center justify-content-center'>
+                            <i class="fa-solid fa-user fs-3"></i>
+                          </div>
                           </div>
                           <div>
                             < p className='fw-semibold text-black'>
@@ -367,7 +379,7 @@ const Home = () => {
                             <p className='fs-14'>CTO, Google</p>
                           </div>
                         </div>
-                        <div className=' rounded-circle text-white bg-success d-flex align-items-center justify-content-center' style={{ height: "50px", width: "50px", fontSize: "11px" }}>Google</div>
+                        <div className=' rounded-circle text-white bg-grd-3 d-flex align-items-center justify-content-center' style={{ height: "50px", width: "50px", fontSize: "11px" }}>Google</div>
                       </div>
                       <div className='card-body p-3'>
                         <p className='font-st' >"EliteVet Tech provided exceptional AWS architects who transformed our cloud infrastructure. Their veteran-led approach brings discipline and excellence to every project."</p>
