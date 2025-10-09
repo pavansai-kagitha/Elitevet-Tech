@@ -44,25 +44,10 @@ const CeoBio = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-12 col-md-9'>
+                        <div className='col-12 col-md-9 my-md-auto'>
                             <div>
                                 <h3 class="sub-title text-black mb-3 text-start">Robert Garcia, USMC BIO 2025</h3>
-                                <p>Born and raised in SW Detroit, I went to Western International HS in Detroit. I
-                                    graduated in 1984 with Honors in Architectural Drafting. Upon graduation, I entered
-                                    the USMC in September of 1984 and scored a 90% on the ASVAB test for the US
-                                    Military. I entered USMC boot camp and quickly became the third squad leader of
-                                    my platoon, 2107 Bravo company. I was promoted to Private First Class “PFC” right
-                                    out of boot camp. Upon returning to Camp Pendleton for Infantry Training School
-                                    “ITS” I was quickly promoted to the first ever Privates and Private First Class for the
-                                    new “LAV” Light Armored Vehicle Unit due to my perfect driving record. I became a
-                                    Driver then promoted to Gunner within a year. After completing (4) awesome years
-                                    in the USMC I was Honorably discharged in 1989 and my military rank was E-4
-                                    Corporal. Upon returning home I used my GI Bill and went to college for
-                                    Engineering. I have been in the Automotive Manufacturing & Engineering Industry
-                                    for over 25 years, and I have a very large Network of fortune 50 & 100 companies I
-                                    call on for New Business Development and Sales opportunities. I have supported
-                                    the Veteran Round Table and NVBDC in the past and believe I would be a perfect fit
-                                    for the Membership Advisory Committee for the NVBDC.</p>
+                                <p>Born and raised in Southwest Detroit, Mr. Garcia graduated with honors in Architectural Drafting from Western International High School in 1984 before enlisting in the U.S. Marine Corps. He quickly advanced to squad leader in Platoon 2107, Bravo Company, and was promoted to Private First Class upon completing boot camp. Selected for the newly formed Light Armored Vehicle (LAV) Unit due to his perfect driving record, he rose from Driver to Gunner and was honorably discharged as a Corporal (E-4) in 1989. After his service, Mr. Garcia used the GI Bill to study engineering and built a 25+ year career in automotive manufacturing, engineering, and IT specializing in business development and sales with a strong network across Fortune 50 and 100 companies. A committed supporter of veteran initiatives, including the Veteran Round Table and NVBDC, he brings proven leadership, industry expertise, and a passion for service to the NVBDC Membership Advisory Committee.</p>
                                     <p className='my-3'>Thank you for your consideration to support the NVBDC,</p>
 
                                     <div className='ctas'>

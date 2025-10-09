@@ -78,8 +78,8 @@ const Jobapply = () => {
         email: !value
           ? "Email is required"
           : /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-          ? ""
-          : "Invalid email format",
+            ? ""
+            : "Invalid email format",
       }));
     } else if (id === "phone_number") {
       const val = value.replace(/[^0-9]/g, "").slice(0, 15);
@@ -97,20 +97,20 @@ const Jobapply = () => {
       //   ...prev,
       //   experience: !val ? "Experience is required" : "",
       // }));
-       let val = value.replace(/[^0-9.]/g, ""); 
-  const parts = val.split(".");
-  if (parts.length > 2) val = parts[0] + "." + parts[1]; // now it's allowed
-  if (Number(val) > 100) val = "100";
-  
-   if (parts.length === 2 && parts[1].length > 1) {
-    val = parts[0] + "." + parts[1].slice(0, 1);
-  }
-  
-  setFormData((prev) => ({ ...prev, experience: val }));
-  setErrors((prev) => ({
-    ...prev,
-    experience: !val ? "Experience is required" : "",
-  }));
+      let val = value.replace(/[^0-9.]/g, "");
+      const parts = val.split(".");
+      if (parts.length > 2) val = parts[0] + "." + parts[1]; // now it's allowed
+      if (Number(val) > 100) val = "100";
+
+      if (parts.length === 2 && parts[1].length > 1) {
+        val = parts[0] + "." + parts[1].slice(0, 1);
+      }
+
+      setFormData((prev) => ({ ...prev, experience: val }));
+      setErrors((prev) => ({
+        ...prev,
+        experience: !val ? "Experience is required" : "",
+      }));
     } else if (id === "cover_letter") {
       let val = value.slice(0, 300);
       setFormData((prev) => ({ ...prev, cover_letter: val }));
@@ -150,60 +150,60 @@ const Jobapply = () => {
     return Object.keys(newErrors).length === 0;
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!job) return;
-  if (!validateForm()) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!job) return;
+    if (!validateForm()) return;
 
-  setSubmitting(true);
+    setSubmitting(true);
 
-  const form = new FormData();
-  form.append("job_post_id", job.id); 
-  // form.append("role_name", job.job_title);
-  form.append("full_name", formData.full_name);
-  form.append("email", formData.email);
-  form.append("phone_number", formData.phone_number);
-  form.append("experience", formData.experience);
-  form.append("cover_letter", formData.cover_letter);
-  form.append("resume", formData.resume);
-  try {
-    const response = await axios.post(
-      "https://cloudifai.com/elitevet-tech/api/post_job_application",
-      form,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+    const form = new FormData();
+    form.append("job_post_id", job.id);
+    // form.append("role_name", job.job_title);
+    form.append("full_name", formData.full_name);
+    form.append("email", formData.email);
+    form.append("phone_number", formData.phone_number);
+    form.append("experience", formData.experience);
+    form.append("cover_letter", formData.cover_letter);
+    form.append("resume", formData.resume);
+    try {
+      const response = await axios.post(
+        "https://cloudifai.com/elitevet-tech/api/post_job_application",
+        form,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
 
-    if (response.status === 201) {
-      //  Success
-      setShowSuccess(true);
+      if (response.status === 201) {
+        //  Success
+        setShowSuccess(true);
 
-      // reset form and resume input
-      setFormData({
-        full_name: "",
-        email: "",
-        phone_number: "",
-        experience: "",
-        cover_letter: "",
-        resume: null,
-      });
-      setErrors({});
-      setFileKey(Date.now()); // reset file input
+        // reset form and resume input
+        setFormData({
+          full_name: "",
+          email: "",
+          phone_number: "",
+          experience: "",
+          cover_letter: "",
+          resume: null,
+        });
+        setErrors({});
+        setFileKey(Date.now()); // reset file input
 
-      setTimeout(() => navigate("/careers"), 2000);
+        setTimeout(() => navigate("/careers"), 2000);
+      }
+    } catch (error) {
+      if (error.response?.status === 409) {
+        // Duplicate email/job application
+        setErrors({ ...errors, api: error.response.data.message || "You have already applied for this job." });
+      } else {
+        setErrors({ ...errors, api: "Submission failed. Please try again." });
+      }
+      console.error("Submission Error:", error.response?.data || error.message);
+    } finally {
+      setSubmitting(false);
     }
-  }  catch (error) {
-  if (error.response?.status === 409) {
-    // Duplicate email/job application
-    setErrors({ ...errors, api: error.response.data.message || "You have already applied for this job." });
-  } else {
-    setErrors({ ...errors, api: "Submission failed. Please try again." });
-  }
-  console.error("Submission Error:", error.response?.data || error.message);
-} finally {
-  setSubmitting(false);
-}
 
-};
+  };
 
 
   if (loading)
@@ -219,12 +219,12 @@ const Jobapply = () => {
           {/* <img src={heroImg} alt="Hero" className="img-fluid w-100 h-100 object-fit-cover" /> */}
         </div>
         <div className="container position-relative z-3 pt-lg-8 pb-lg-1 pb-4">
-            <div className="pb-5">
-          <div className="row g-3 align-items-center justify-content-center">
-            <div className="col-12 col-lg-8 text-center">
-             <div className="content_outer text-center my-4 "><h1 className="text-white display-5 fw-semibold font-primary">Join Our Team &amp; Build the Future with Us</h1></div>
+          <div className="pb-5">
+            <div className="row g-3 align-items-center justify-content-center">
+              <div className="col-12 col-lg-8 text-center">
+                <div className="content_outer text-center my-4 "><h1 className="text-white display-5 fw-semibold font-primary">Join Our Team &amp; Build the Future with Us</h1></div>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </section>
@@ -239,7 +239,7 @@ const Jobapply = () => {
               </Link>
               <div className="job_details mt-4">
                 <h2 className="mb-3 sub-heading fw-semibold fs-2">
-                  Apply for {job.job_title} 
+                  Apply for {job.job_title}
                 </h2>
                 <p className="mb-1">{job.description}</p>
                 <p>{job.requirements}</p>
@@ -306,9 +306,9 @@ const Jobapply = () => {
                         <Form.Label>Experience (years)</Form.Label>
                         <Form.Control
                           type="number"
-                          step="0.1"  
+                          step="0.1"
                           id="experience"
-                           max={100}    
+                          max={100}
                           value={formData.experience}
                           onChange={handleChange}
                           placeholder="Years of experience (e.g., 1.5)"
