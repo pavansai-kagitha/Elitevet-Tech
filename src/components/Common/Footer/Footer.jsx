@@ -7,7 +7,7 @@ const Footer = () => {
     const location = useLocation();
 
     // Example: hide CTA on /contact page
-    const showCTA = location.pathname !== '/contact';
+    const showCTA = location.pathname !== '/contact' && location.pathname !== '/subscribe';
     return (
 
         <>
