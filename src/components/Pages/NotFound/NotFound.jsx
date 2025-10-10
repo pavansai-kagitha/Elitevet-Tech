@@ -25,7 +25,7 @@ const NotFound = () => {
                    </p>
 
                   
-                   <Button to="/" classname="btn bg-pry rounded-pill mt-3" text="Back to Home"/>
+                   <Button to="/" classname="btn bg-pry rounded-pill mt-3 text-white" text="Back to Home"/>
    
                  </div>
                </div>

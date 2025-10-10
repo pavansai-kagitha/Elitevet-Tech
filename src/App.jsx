@@ -15,6 +15,7 @@ import Partners from "./components/Pages/Partners/Partners";
 import Contact from "./components/Pages/Contact/Contact";
 import NotFound from "./components/Pages/NotFound/NotFound";
 import CeoBio from "./components/Pages/AboutUs/CeoBio";
+import Subscribe from "./components/Pages/Subscribe/Subscribe";
 
 
 
@@ -41,6 +42,7 @@ function App() {
          <Route path="/services/:serviceId" element={<MotionWrapper keyId={location.pathname}><ServicesPage/></MotionWrapper>}/>
          <Route path="/services/:categoryId/:serviceId" element={<MotionWrapper keyId={location.pathname}><ServicesPage/></MotionWrapper>} />
          <Route path="*" element={<MotionWrapper keyId={location.pathname}><NotFound/></MotionWrapper>} />
+          <Route path="/subscribe" element={<MotionWrapper keyId={location.pathname}><Subscribe/></MotionWrapper>} />
       </Routes>
       </AnimatePresence>
       <Footer/>
